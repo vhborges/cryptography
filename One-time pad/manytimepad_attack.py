@@ -2,7 +2,7 @@
 This attack explores the vulnerability where one uses the One-time pad (or any Stream-cipher) to encrypt multiple messages using the same key.
 
 For this attack to work, the file with must contain enough ciphertexts to give a good hint of where the spaces of each message are located.
-Ciphertexts with similar lengths is also helpful, as the longer ones will have less caracters to xor with near their ends.
+Ciphertexts with similar lengths is also helpful, as the longer ones will have less characters to xor with near their ends.
 """
 
 def findSpaces(cipher1, cipher2, positions):
