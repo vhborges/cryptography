@@ -5,14 +5,14 @@ For this attack to work, the file with must contain enough ciphertexts to give a
 Ciphertexts with similar lengths is also helpful, as the longer ones will have less characters to xor with near their ends.
 """
 
-def findSpaces(cipher1, cipher2, positions):
+def findSpaces(cipher1, cipher2, frequencies):
     cipher1 = bytes.fromhex(cipher1)
     cipher2 = bytes.fromhex(cipher2)
     c1Xc2 = xorb(cipher1, cipher2).hex()
     for i in range(0, len(c1Xc2), 2):
         xorResult = int(c1Xc2[i:i+2], 16)
         if hasSpace(xorResult):
-            positions[int(i/2)] += 1
+            frequencies[int(i/2)] += 1
 
 def hasSpace(xorResult):
     if 65 <= xorResult <= 90 or\
@@ -30,12 +30,12 @@ def computeKey(ciphertexts):
     key = [None]*keySize
     maxFrequency = [0]*keySize
     for i in range(len(ciphertexts)):
-        positions = [0]*int(len(ciphertexts[i])/2)
+        frequencies = [0]*int(len(ciphertexts[i])/2)
         for msg in ciphertexts:
             if msg != ciphertexts[i]:
-                findSpaces(ciphertexts[i], msg, positions)
+                findSpaces(ciphertexts[i], msg, frequencies)
         msgBytes = bytes.fromhex(ciphertexts[i])
-        for pos, freq in zip(range(len(positions)), positions):
+        for pos, freq in zip(range(len(frequencies)), frequencies):
             filterFreq = numberOfMsgs(ciphertexts, pos)
             margin = int(filterFreq/3)
             if freq >= filterFreq-margin and freq > maxFrequency[pos]:
