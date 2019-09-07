@@ -37,9 +37,9 @@ def computeKey(ciphertexts):
                 findSpaces(ciphertexts[i], msg, frequencies)
         msgBytes = bytes.fromhex(ciphertexts[i])
         for pos, freq in zip(range(len(frequencies)), frequencies):
-            filterFreq = numberOfMsgs(ciphertexts, pos)
-            margin = int(filterFreq/3)
-            if freq >= filterFreq-margin and freq > maxFrequency[pos]:
+            limit = numberOfMsgs(ciphertexts, pos) - 1
+            margin = int(limit/4)
+            if freq >= limit-margin and freq > maxFrequency[pos]:
                 maxFrequency[pos] = freq
                 key[pos] = msgBytes[pos]^ord(' ')
     return key
