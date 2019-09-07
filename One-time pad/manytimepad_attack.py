@@ -12,10 +12,7 @@ def findSpaces(cipher1, cipher2, positions):
     for i in range(0, len(c1Xc2), 2):
         xorResult = int(c1Xc2[i:i+2], 16)
         if hasSpace(xorResult):
-            if int(i/2) in positions:
-                positions[int(i/2)] += 1
-            else:
-                positions[int(i/2)] = 1
+            positions[int(i/2)] += 1
 
 def hasSpace(xorResult):
     if 65 <= xorResult <= 90 or\
@@ -33,12 +30,12 @@ def computeKey(ciphertexts):
     key = [None]*keySize
     maxFrequency = [0]*keySize
     for i in range(len(ciphertexts)):
-        positions = {}
+        positions = [0]*int(len(ciphertexts[i])/2)
         for msg in ciphertexts:
             if msg != ciphertexts[i]:
                 findSpaces(ciphertexts[i], msg, positions)
         msgBytes = bytes.fromhex(ciphertexts[i])
-        for pos, freq in positions.items():
+        for pos, freq in zip(range(len(positions)), positions):
             filterFreq = numberOfMsgs(ciphertexts, pos)
             margin = int(filterFreq/3)
             if freq >= filterFreq-margin and freq > maxFrequency[pos]:
