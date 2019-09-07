@@ -27,21 +27,21 @@ def xorb(msg1, msg2):
     return bytes(a^b for a, b in zip(msg1, msg2))
 
 def computeKey(ciphertexts):
-    keySize = max(int(len(msg)/2) for msg in ciphertexts)
+    keySize = max(int(len(cipher2)/2) for cipher2 in ciphertexts)
     key = [None]*keySize
     maxFrequency = [0]*keySize
-    for i in range(len(ciphertexts)):
-        frequencies = [0]*int(len(ciphertexts[i])/2)
-        for msg in ciphertexts:
-            if msg != ciphertexts[i]:
-                findSpaces(ciphertexts[i], msg, frequencies)
-        msgBytes = bytes.fromhex(ciphertexts[i])
+    for cipher1 in ciphertexts:
+        frequencies = [0]*int(len(cipher1)/2)
+        for cipher2 in ciphertexts:
+            if cipher1 != cipher2:
+                findSpaces(cipher1, cipher2, frequencies)
+        cipher1 = bytes.fromhex(cipher1)
         for pos, freq in zip(range(len(frequencies)), frequencies):
             limit = numberOfMsgs(ciphertexts, pos) - 1
             margin = int(limit/4)
             if freq >= limit-margin and freq > maxFrequency[pos]:
                 maxFrequency[pos] = freq
-                key[pos] = msgBytes[pos]^ord(' ')
+                key[pos] = cipher1[pos]^ord(' ')
     return key
 
 # number of messages whose size is bigger than pos (2*pos on hexadecimal)
