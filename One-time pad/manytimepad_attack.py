@@ -27,7 +27,7 @@ def xorb(msg1, msg2):
     return bytes(a^b for a, b in zip(msg1, msg2))
 
 def computeKey(ciphertexts):
-    keySize = max(int(len(cipher2)/2) for cipher2 in ciphertexts)
+    keySize = max(int(len(cipher)/2) for cipher in ciphertexts)
     key = [None]*keySize
     maxFrequency = [0]*keySize
     for cipher1 in ciphertexts:
