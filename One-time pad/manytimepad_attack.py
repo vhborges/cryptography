@@ -5,6 +5,7 @@ For this attack to work, the file with must contain enough ciphertexts to give a
 Ciphertexts with similar lengths is also helpful, as the longer ones will have less characters to xor with near their ends.
 """
 
+# find possible space characters contained either on cipher1 or cipher2 using the resulting xor of both
 def findSpaces(cipher1, cipher2, frequencies):
     cipher1 = bytes.fromhex(cipher1)
     cipher2 = bytes.fromhex(cipher2)
@@ -43,8 +44,9 @@ def computeKey(ciphertexts):
                 key[pos] = msgBytes[pos]^ord(' ')
     return key
 
+# number of messages whose size is bigger than pos (2*pos on hexadecimal)
 def numberOfMsgs(ciphertexts, pos):
-    pos = 2*pos #hexadecimal
+    pos = 2*pos
     return sum(1 for msg in ciphertexts if len(msg) > pos)
 
 def computePlaintext(ciphertext, key):
@@ -67,6 +69,7 @@ def printList(l):
     for item in l:
         print(item)
 
+# update the key when knowing that plaintext[pos] == string
 def modifyKey(ciphertexts, key, string, pos, msgNo):
     size = len(string)
     for i in range(pos, pos+size):
