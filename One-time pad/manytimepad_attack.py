@@ -70,9 +70,10 @@ def printList(l):
     for item in l:
         print(item)
 
-def modifyKey(ciphertexts, key, char, pos, msgNo):
-    pos = pos*2 #hexadecimal
-    key[pos] = ord(char)^int(ciphertexts[msgNo][pos:pos+2], 16)
+def modifyKey(ciphertexts, key, string, pos, msgNo):
+    size = len(string)
+    for i in range(pos, pos+size):
+        key[i] = ord(string[i-pos])^int(ciphertexts[msgNo][i*2:i*2+2], 16)
 
 def readFile(file):
     with open(file) as f:
