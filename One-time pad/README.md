@@ -7,7 +7,7 @@ However, since it requires that:
 2. the key be truly random (security requirement), and
 3. the key used to encrypt one plaintext must never be used to encrypt another (security requirement),
 
-it's an unpractical cipher to use in modern applications.
+it's an unpractical cipher to use in most modern applications.
 
 Here, we explore the vulnerability created by breaking the third rule above. In this scenario, since the same key was used to encrypt multiple messages,
 we can gather information about the messages that wouldn't be possible otherwise.
@@ -28,8 +28,8 @@ many different messages as possible.
 
 ## Attacking the Many-Time Pad
 Simply run the `manytimepad_attack.py` script, it will try to find the probable plaintext characters of each ciphertext by guessing the position of each
-space character for each pair of ciphertexts inside the `ciphertexts.txt` file. The script will print (in the standard output) a list of messages where
-each _ represents a character that couldn't be guessed and the other characters are the guesses made by the script.
+space character for each pair of ciphertexts inside the `ciphertexts.txt` file. It will then print (in the standard output) a list of messages where
+each _ represents a character that couldn't be guessed and the other characters are guesses made by the script.
 
 In most cases where the messages are English common phrases and there's a high number of messages (8 or more) with similar lengths, this script is likely
 to correctly guess the majority of characters in the plaintexts.
