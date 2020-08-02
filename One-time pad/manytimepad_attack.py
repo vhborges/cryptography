@@ -9,12 +9,10 @@ from utils import readFile, printList, xorBytes
 
 # find possible space characters contained either on cipher1 or cipher2 using the resulting xor of both
 def findSpaces(cipher1, cipher2, frequencies):
-    cipher1 = bytes.fromhex(cipher1)
-    cipher2 = bytes.fromhex(cipher2)
     c1Xc2 = xorBytes(cipher1, cipher2)
-    for i, asciiNum in enumerate(c1Xc2):
+    for pos, asciiNum in enumerate(c1Xc2):
         if hasSpace(asciiNum):
-            frequencies[i] += 1
+            frequencies[pos] += 1
 
 def hasSpace(xorResult):
     if 65 <= xorResult <= 90 or\
@@ -25,32 +23,29 @@ def hasSpace(xorResult):
         return False
 
 def computeKey(ciphertexts):
-    keySize = max(len(cipher)//2 for cipher in ciphertexts)
+    keySize = max(len(cipher) for cipher in ciphertexts)
     key = [None]*keySize
     maxFrequency = [0]*keySize
     for cipher1 in ciphertexts:
-        frequencies = [0]*(len(cipher1)//2)
+        frequencies = [0]*len(cipher1)
         for cipher2 in ciphertexts:
             if cipher1 != cipher2:
                 findSpaces(cipher1, cipher2, frequencies)
-        cipher1 = bytes.fromhex(cipher1)
-        for pos, freq in zip(range(len(frequencies)), frequencies):
+        for pos, freq in enumerate(frequencies):
             limit = numberOfMsgs(ciphertexts, pos) - 1
-            margin = limit//4
+            margin = limit // 4
             if (freq >= limit - margin) and (freq > maxFrequency[pos]):
                 maxFrequency[pos] = freq
                 key[pos] = cipher1[pos] ^ ord(' ')
     return key
 
-# number of messages whose size is bigger than pos (2*pos on hexadecimal)
+# number of messages whose size is bigger than pos
 def numberOfMsgs(ciphertexts, pos):
-    pos *= 2
     return sum(1 for msg in ciphertexts if len(msg) > pos)
 
 def computePlaintext(ciphertext, key):
-    ciphertext = bytes.fromhex(ciphertext)
     plaintext = ""
-    for a,b in zip(ciphertext, key):
+    for a, b in zip(ciphertext, key):
         if b != None:
             plaintext += chr(a ^ b)
         else:
@@ -67,14 +62,15 @@ def plaintextsList(ciphertexts, key):
 def modifyKey(ciphertexts, key, string, pos, msgNo):
     size = len(string)
     for i in range(pos, pos+size):
-        key[i] = ord(string[i-pos]) ^ int(ciphertexts[msgNo][i*2:i*2+2], 16)
+        key[i] = ord(string[i-pos]) ^ ciphertexts[msgNo][i]
 
 def main():
     ciphertexts = readFile('ciphertexts.txt')
+    ciphertextsBytes = [bytes.fromhex(cipher) for cipher in ciphertexts]
 
-    key = computeKey(ciphertexts)
+    key = computeKey(ciphertextsBytes)
 
-    plaintexts = plaintextsList(ciphertexts, key)
+    plaintexts = plaintextsList(ciphertextsBytes, key)
 
     printList(plaintexts)
 
