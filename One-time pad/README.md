@@ -1,6 +1,7 @@
 # One-Time Pad
-This cipher is one of the simplest and easiest to understand and, if correctly used, is the most secure known cipher, meaning that no information about
-the plaintext can be gathered by simply looking at the ciphertext.
+This cipher is one of the simplest and easiest to understand.
+
+If correctly used, is the most secure known cipher, meaning that no information about the plaintext can be gathered by simply looking at the ciphertext.
 
 However, since it requires that:
 1. the key's length must be the same size as the plaintext length (implementation requirement);
