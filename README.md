@@ -3,6 +3,8 @@ This repository aims to be my personal practical guide to the [Coursera's Crypto
 course by Dan Boneh (University of Stanford). It contains some well-known cipher implementations and attacks, many of them were made 
 to solve the programming assignments of the course.
 
+It also contains some (insecure!) implementations of famous crypto algorithms which were made for didactic purposes only.
+
 ## Running dependencies
 All the codes are written in **Python 3** and some of them use the [PyCryptodome](https://www.pycryptodome.org) module, so they are the only prequisites.
 

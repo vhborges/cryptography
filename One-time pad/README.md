@@ -1,6 +1,7 @@
 # One-Time Pad
-This cipher is one of the simplest and easiest to understand and, if correctly used, is the most secure known cipher, meaning that no information about
-the plaintext can be gathered by simply looking at the ciphertext.
+This cipher is one of the simplest and easiest to understand.
+
+If correctly used, it's the most secure known cipher, meaning that no information about the plaintext can be gathered by simply looking at the ciphertext.
 
 However, since it requires that:
 1. the key's length must be the same size as the plaintext length (implementation requirement);
@@ -9,7 +10,7 @@ However, since it requires that:
 
 it's an unpractical cipher to use in most modern applications.
 
-Here, we explore the vulnerability created by breaking the third rule above. In this scenario, since the same key was used to encrypt multiple messages,
+Here, I explore the vulnerability created by breaking the third rule above. In this scenario, since the same key was used to encrypt multiple messages,
 we can gather information about the messages that wouldn't be possible otherwise.
 
 This attack is sometimes called the "Many-Time Pad attack", since the name "**One-Time** Pad" implies that an one-time (unique) key is used.
