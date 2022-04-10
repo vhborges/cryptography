@@ -14,7 +14,7 @@ def ecb_avalanche_effect():
     plaintext = ecb.decrypt(ciphertext, KEY)
     print('Decrypted ciphertext:', plaintext, sep='\n', end="\n\n")
 
-    plaintext = 'From:Lucas\nTo:Pedro\nContent:criptografias de EFB sao previsiveis'
+    plaintext = 'From:Lucas\nTo:Pedro\nContent:the ECB mode of encription is predictable'
     print('Modified plaintext:', plaintext, sep='\n', end='\n\n')
     ciphertext = ecb.encrypt(plaintext, KEY)
     print('Ciphertext:', ciphertext, end="\n\n")
@@ -56,7 +56,7 @@ def pcbc_avalanche_effect():
     plaintext = pcbc.decrypt(ciphertext, KEY)
     print('Decrypted ciphertext:', plaintext, sep='\n', end="\n\n")
 
-    plaintext = 'From:Lucas\nTo:Pedro\nContent:the PCBD mode of encryption is NOT vulnerable to bit flipping'
+    plaintext = 'From:Lucas\nTo:Pedro\nContent:the PCBC mode of encription is NOT vulnerable to bit flipping'
     print('Modified plaintext:', plaintext, sep='\n', end='\n\n')
     ciphertext = pcbc.encrypt(plaintext, KEY)
     print('Ciphertext:', ciphertext, end="\n\n")

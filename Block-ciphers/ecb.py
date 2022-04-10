@@ -19,7 +19,7 @@ def ecb_decryption(blocks: Iterator, keys: list):
     return plaintext
 
 def encrypt(plaintext: str, key: bytes) -> bytes:
-    return common.encrypt(plaintext, key, BLOCK_SIZE, ROUND_QTY, ecb_encryption)
+    return common.encrypt(plaintext, key, ecb_encryption)
 
 def decrypt(ciphertext: bytes, key: bytes) -> Union[str, bytes]:
-    return common.decrypt(ciphertext, key, BLOCK_SIZE, ROUND_QTY, ecb_decryption, ecb=True)
+    return common.decrypt(ciphertext, key, ecb_decryption, ecb=True)
