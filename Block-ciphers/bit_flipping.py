@@ -27,18 +27,20 @@ def cbc_bitflipping():
     print('Original plaintext:', plaintext, sep='\n', end='\n\n')
     ciphertext = cbc.encrypt(plaintext, KEY)
 
-    iv = bytearray(ciphertext[:cbc.IV_SIZE])
+    ##### modifying the IV to bitflip the first block #####
+    iv = bytearray(ciphertext[:common.IV_SIZE])
     iv[5:] = common.xor(iv[5:], common.xor(b'Lucas', b'Mario'))
-    ciphertext = bytes(iv) + ciphertext[cbc.IV_SIZE:]
+    ciphertext = bytes(iv) + ciphertext[common.IV_SIZE:]
+    #######################################################
 
     print('Bitflipping Lucas to Mario...')
     plaintext = cbc.decrypt(ciphertext, KEY)
     print('Decrypted ciphertext:', plaintext, sep='\n', end="\n\n")
 
     ##### modifying the second block #####
-    block = bytearray(ciphertext[cbc.BLOCK_SIZE:cbc.BLOCK_SIZE*2])
+    block = bytearray(ciphertext[common.BLOCK_SIZE:common.BLOCK_SIZE*2])
     block[4:9] = common.xor(block[4:9], common.xor(b'Pedro', b'Mario'))
-    ciphertext = ciphertext[:cbc.BLOCK_SIZE] + block + ciphertext[cbc.BLOCK_SIZE*2:]
+    ciphertext = ciphertext[:common.BLOCK_SIZE] + block + ciphertext[common.BLOCK_SIZE*2:]
     ######################################
 
     print('Bitflipping Pedro to Mario...')
@@ -52,9 +54,11 @@ def pcbc_bitflipping():
     print('Original plaintext:', plaintext, sep='\n', end='\n\n')
     ciphertext = cbc.encrypt(plaintext, KEY)
 
+    ##### modifying the IV to bitflip the first block #####
     iv = bytearray(ciphertext[:pcbc.IV_SIZE])
     iv[5:] = common.xor(iv[5:], common.xor(b'Lucas', b'Mario'))
     ciphertext = bytes(iv) + ciphertext[pcbc.IV_SIZE:]
+    #######################################################
 
     print('Bitflipping Lucas to Mario...')
     plaintext = pcbc.decrypt(ciphertext, KEY)
