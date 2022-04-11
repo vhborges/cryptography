@@ -17,7 +17,7 @@ There are multiple ways of encrypting each block and unifying the result into a 
 
 To learn more about modes of operation, this Wikipedia page covers the main ones pretty well: [https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation).
 
-This section I've implemented and will cover three modes: ECB, CBC and PCBC.
+In this repo I've implemented and will cover three modes: ECB, CBC and PCBC.
 
 Some Modes of Operation requires that each block should be of the same lenght, so when the last block does not fit into a whole block, we need to add a "padding" in the end. Suppose we need to add 6 bytes to the end of a block, the common way to do this is by adding the byte "x06" 6 times, this facilitates the process of identifying what is just a padding and what is the actual plaintext, so that we can decrypt the ciphertext correctly.
 
