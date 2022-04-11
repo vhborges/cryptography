@@ -19,7 +19,7 @@ To learn more about modes of operation, this Wikipedia page covers the main ones
 
 This section I've implemented and will cover three modes: ECB, CBC and PCBC.
 
-Some Modes of Operating requires that each block should be of the same lenght, so when the last block does not fit into a whole block, we need to add a "padding" in the end. Suppose we need to add 6 bytes to the end of a block, the common way to do this is by adding the byte "x06" 6 times, this facilitates the process of identifying what is just a padding and what is the actual plaintext, so that we can decrypt the ciphertext correctly.
+Some Modes of Operation requires that each block should be of the same lenght, so when the last block does not fit into a whole block, we need to add a "padding" in the end. Suppose we need to add 6 bytes to the end of a block, the common way to do this is by adding the byte "x06" 6 times, this facilitates the process of identifying what is just a padding and what is the actual plaintext, so that we can decrypt the ciphertext correctly.
 
 ## Avalanche Effect
 The Avalanche Effect is a property of some algorithms and encryption schemes in which small changes in the input (on our case, the plainext) generates huge changes in the output (on our case, the ciphertext).
