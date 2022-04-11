@@ -39,6 +39,6 @@ This attack consists in changing some bytes of the IV (usually the first block o
 
 Suppose we have the plaintext "you owe me $10000". By this attack, we can change the middle zero to a dot, so that when the corresponding ciphertext gets to it's destination, it will be decrypted to "you owe me $10.00".
 
-The PCBC mode is not vulnerable to this attack since it uses both the plaintext and the ciphertext of the previous block to help decrypt the next block, so any change to any byte of any block will propagate to all next blocks and render the ciphertext useless. My code couldn't even decrypt the resulting ciphertext because it corrupted the padding, so that almost all bytes were discarded in the decryption process.
-
 To see this attack in action, study and run the `bit_flipping.py` script.
+
+Obs: the PCBC mode is not vulnerable to this attack since it uses both the plaintext and the ciphertext of the previous block to help decrypt the next block, so any change to any byte of any block will propagate to all next blocks and render the ciphertext useless. My code couldn't even decrypt the resulting ciphertext because it corrupted the padding, so that almost all bytes were discarded in the decryption process.
