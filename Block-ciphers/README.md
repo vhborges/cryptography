@@ -1,9 +1,9 @@
 # Block-Ciphers
 Block-Cipher is a type of encryption scheme in which the plaintext to be encrypted is divided into blocks of the same length, and each block is encrypted separately.
 
-Suppose you have the plaintext "Cryptography is awesome" and you want to encrypt it using a block-cipher with blocks of length 8, so each block would be:
-1 - "Cryptogr"
-2 - "aphy is "
+Suppose you have the plaintext "Cryptography is awesome" and you want to encrypt it using a block-cipher with blocks of length 8, so each block would be:<br>
+1 - "Cryptogr"<br>
+2 - "aphy is "<br>
 3 - "awesome"
 
 Obs: the last block doesn't have the correct length, we'll deal with that later...
@@ -18,6 +18,8 @@ There are multiple ways of encrypting each block and unifying the result into a 
 To learn more about modes of operation, this Wikipedia page covers the main ones pretty well: [https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation).
 
 This section I've implemented and will cover three modes: ECB, CBC and PCBC.
+
+Some Modes of Operating requires that each block should be of the same lenght, so when the last block does not fit into a whole block, we need to add a "padding" in the end. Suppose we need to add 6 bytes to the end of a block, the common way to do this is by adding the byte "x06" 6 times, this facilitates the process of identifying what is just a padding and what is the actual plaintext, so that we can decrypt the ciphertext correctly.
 
 ## Avalanche Effect
 The Avalanche Effect is a property of some algorithms and encryption schemes in which small changes in the input (on our case, the plainext) generates huge changes in the output (on our case, the ciphertext).
